@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haier.interconn.hcloud.provider.dao.MonitorAlarmInfoDAO">
+
+	<!-- 插入数据库用户表 -->
+	<insert id="insertAlarmInfo"  useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO monitor.monitor_alarm_info(application_id,application_name,user_ids,group_ids,reason,alarm_lvl,create_time,app_name,type,exception,res_from,alarm_type )
+		VALUES(#{applicationId},#{applicationName},#{userIds},#{groupIds},#{reason},#{alarmLvl},NOW(),#{appName},#{type},#{exception},#{resFrom},#{alarmType})
+	</insert>
+
+	<resultMap id="monitorAlarmInfoMap" type="com.haier.interconn.hcloud.provider.entity.MonitorAlarmInfo">
+		<result property="applicationName" column="application_name"></result>
+
+		<result property="applicationId" column="application_id"></result>
+
+	</resultMap>
+
+	<select id="getinfoByAppname" resultMap="monitorAlarmInfoMap" parameterType="String">
+		select  application_id,application_name  FROM monitor_alarm_info WHERE app_name = #{appName}
+	</select>
+
+
+</mapper>

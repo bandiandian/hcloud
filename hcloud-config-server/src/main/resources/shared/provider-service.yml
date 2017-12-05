@@ -1,0 +1,55 @@
+server:
+  context-path: /user
+  port: 8090
+
+
+management:
+  trace:
+    include: request_headers,response_headers,errors,parameters,query_string,remote_address
+
+
+user:
+  name: bandiandian
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    jdbc-url: jdbc:mysql://10.138.8.63:3306/monitor?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: anywhere@123
+    idle-timeout: 60000
+    maximum-pool-size: 15 #连接池中允许的最大连接数。缺省值：10；推荐的公式：((core_count * 2) + effective_spindle_count)
+    max-lifetime: 1665060
+    connection-timeout: 30000
+ #config属性级别低 不能覆盖本地属性
+  cloud:
+    config:
+      override-none: true
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  dialect: mysql
+  reasonable: true
+  pageSizeZero: true
+
+influxdb:
+  url: http://10.138.25.211:8086/
+  enable: true
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    metadata-map:
+      version: 1.0.1
+      context-path: ${server.context-path}
+      app-name: hcloud
+      weight: 100
+
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:1111/eureka/
+
+

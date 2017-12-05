@@ -1,0 +1,48 @@
+
+#默认的超时时间
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+
+ribbon:
+  connectTimeout: 30000
+  readTimeout: 60000
+
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:1111/eureka/
+
+
+
+
+
+
+
+
+server:
+  port: 12345
+
+spring:
+  zipkin:
+    base-url: http://localhost:9411
+    enabled: true
+  sleuth:
+    sampler:
+      percentage: 1
+
+
+##设置上传文件大小限制，默认是10Mb
+  http:
+    multipart:
+      max-request-size: 50Mb
+      max-file-size: 50Mb

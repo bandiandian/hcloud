@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: consumer-service
+  cloud:
+    config:
+      uri: http://localhost:8888
+      fail-fast: true
+
+
+
+
+
+swagger:
+  api:
+    scanPackage: com.haier.interconn.hcloud.consumer.controller
+    title: 服务消费方应用服务API
+    createBy: 班点点
+    version: 1.0.0-snapshot
+
+
+logging:
+  org.springframework.web.servlet.DispatcherServlet:
+    level: debug

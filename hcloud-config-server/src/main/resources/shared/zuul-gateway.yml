@@ -1,0 +1,29 @@
+zuul:
+  routes:
+    api-a:
+      path: /api-a/**
+      serviceId: http://localhost:9090/api-a/
+    api-b:
+      path: /api-b/**
+      serviceId: service-feign
+    api-c:
+      path: /api-c/**
+      serviceId: EUREKA-CLIENT
+
+ #config属性级别低 不能覆盖本地属性
+spring:
+  cloud:
+    config:
+      override-none: true
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    a-s-g-name: Q09OU1VNRVItU0VSVklDRQ==
+    metadata-map:
+      version: 1.0.0
+      context-path: ${server.context-path}
+      app-name: hcloud
+      weight: 100
+

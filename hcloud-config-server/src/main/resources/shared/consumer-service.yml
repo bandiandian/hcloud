@@ -1,0 +1,62 @@
+server:
+  context-path: /user
+  port: 8091
+
+
+
+user:
+  name: bandiandian
+
+ #config属性级别低 不能覆盖本地属性
+spring:
+  cloud:
+    config:
+      override-none: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+
+
+
+file:
+  name: bandiandian
+
+influxdb:
+  url: http://10.138.25.211:8086/
+  enable: true
+
+
+microservice:
+  reference:
+    provider-service:
+      version: 1.0.0
+
+
+#设置feign日志级别
+feign:
+  logger:
+    level: debug
+  hystrix:
+    enabled: true
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    a-s-g-name: Q09OU1VNRVItU0VSVklDRQ==
+    metadata-map:
+      version: 1.0.1
+      context-path: ${server.context-path}
+      app-name: hcloud
+      weight: 100
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:1111/eureka/
+
+

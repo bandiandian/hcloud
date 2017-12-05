@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: monitor-app
+#  cloud:
+#    config:
+#      uri: http://localhost:8888
+#      fail-fast: true
+server:
+  port: 7777
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone:  http://10.138.25.211:1111/eureka/
+
+
+
+
